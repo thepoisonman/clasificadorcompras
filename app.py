@@ -48,6 +48,10 @@ if uploaded_file is not None:
 
         if st.button("Clasificar Comprobantes"):
             df_clasificado = clasificar_comprobantes(st.session_state.df, cuit_col, proveedor_col, memory)
+
+            # Crear carpeta outputs si no existe
+            os.makedirs("outputs", exist_ok=True)
+
             output_path = "outputs/comprobantes_clasificados.xlsx"
             df_clasificado.to_excel(output_path, index=False)
             st.success(f"Archivo clasificado guardado en: {output_path}")
